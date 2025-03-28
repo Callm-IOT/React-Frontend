@@ -76,11 +76,13 @@ const styles = StyleSheet.create({
     height: 24,
     tintColor: '#F5F5DC',
     marginRight: 15,
+    marginTop: 39,
   },
   headerTitle: {
     fontSize: 20,
     color: '#F5F5DC',
     fontWeight: '600',
+    marginTop: 39,
   },
   mainContent: {
     flex: 1,

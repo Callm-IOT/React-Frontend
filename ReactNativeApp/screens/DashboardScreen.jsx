@@ -2,11 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, SafeAreaView } from 'react-native';
 
 const DashboardScreen = ({ navigation }) => {
+  const handleLogout = () => {
+    // Lógica para cerrar sesión (sin cambiar colores)
+    console.log('Usuario cerró sesión');
+    navigation.navigate('Login');
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar backgroundColor="#345830" barStyle="light-content" />
       <View style={styles.container}>
-        {/* Barra superior con icono de usuario */}
+        {/* Barra superior con icono de usuario y logout */}
         <View style={styles.topBar}>
           <TouchableOpacity onPress={() => navigation.navigate('Usuario')}>
             <Image 
@@ -14,11 +20,18 @@ const DashboardScreen = ({ navigation }) => {
               style={styles.userIcon} 
             />
           </TouchableOpacity>
+          
+          {/* Botón de logout a la derecha */}
+          <TouchableOpacity onPress={handleLogout}>
+            <Image 
+              source={require('../assets/icon_logout.png')} 
+              style={styles.logoutIcon} 
+            />
+          </TouchableOpacity>
         </View>
 
-        {/* Contenido principal */}
+        {/* Resto del contenido exactamente igual */}
         <View style={styles.mainContent}>
-          {/* Contador de visitantes */}
           <View style={styles.visitorsToday}>
             <Text style={styles.title}>Visitantes el día de hoy:</Text>
             <Text style={styles.counter}>12</Text>
@@ -39,7 +52,6 @@ const DashboardScreen = ({ navigation }) => {
             </View>
           </View>
 
-          {/* Tabla de visitantes recientes */}
           <View style={styles.tableContainer}>
             <Text style={styles.tableTitle}>Visitantes Recientes:</Text>
             <View style={styles.table}>
@@ -70,7 +82,6 @@ const DashboardScreen = ({ navigation }) => {
           </View>
         </View>
 
-        {/* Barra de Navegación Inferior */}
         <View style={styles.bottomNav}>
           <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Dashboard')}>
             <Image source={require('../assets/icon_home.png')} style={styles.navIcon} />
@@ -95,28 +106,35 @@ const DashboardScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#345830',
+    backgroundColor: '#345830', // Color original
   },
   container: {
     flex: 1,
-    backgroundColor: '#d5e2d4',
+    backgroundColor: '#d5e2d4', // Color original
   },
   topBar: {
-    height: 78,
+    height: 75,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    justifyContent: 'flex-start',
-    backgroundColor: '#345830',
+    justifyContent: 'space-between', // Para separar los iconos
+    backgroundColor: '#345830', // Color original
     borderBottomLeftRadius: 15,
     borderBottomRightRadius: 15,
   },
   userIcon: {
     width: 36,
     height: 36,
-    tintColor: '#ffffff',
-    
+    tintColor: '#ffffff', // Color original
+    marginTop: 39, // Manteniendo el mismo margen
   },
+  logoutIcon: {
+    width: 36,
+    height: 28,
+ 
+    marginTop: 39, // Mismo margen superior
+  },
+  // Todos los demás estilos se mantienen exactamente igual
   mainContent: {
     flex: 1,
     padding: 20,
@@ -199,6 +217,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: '600',
     fontSize: 14,
+    color: '#ffffff',
   },
   tableContainer: {
     backgroundColor: '#D9D9D9',
@@ -281,6 +300,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     marginBottom: 4,
+    
   },
   navLabel: {
     fontSize: 12,

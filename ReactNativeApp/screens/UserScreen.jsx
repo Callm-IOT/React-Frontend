@@ -31,9 +31,15 @@ const UserScreen = ({ navigation }) => {
 
           {/* Botones de acciones */}
           <View style={styles.actionsContainer}>
-            <TouchableOpacity style={[styles.actionButton, styles.firstButton]}>
-              <Text style={styles.actionButtonText}>Actualizar Perfil</Text>
-            </TouchableOpacity>
+          <TouchableOpacity 
+             style={[styles.actionButton, styles.firstButton]}
+            onPress={() => navigation.navigate('UpdateProfile', {
+             currentImage: require('../assets/iconuser.png'),
+               currentName: 'Juan Pérez',
+               currentEmail: 'juan.perez@example.com'
+            })}>
+             <Text style={styles.actionButtonText}>Actualizar Perfil</Text>
+              </TouchableOpacity>
             
             <TouchableOpacity style={styles.actionButton}>
               <Text style={styles.actionButtonText}>Cambiar Contraseña</Text>
@@ -72,11 +78,13 @@ const styles = StyleSheet.create({
     height: 24,
     tintColor: '#F5F5DC',
     marginRight: 15,
+    marginTop: 39,
   },
   headerTitle: {
     fontSize: 20,
     color: '#F5F5DC',
     fontWeight: '600',
+    marginTop: 39,
   },
   mainContent: {
     flex: 1,
