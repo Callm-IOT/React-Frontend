@@ -10,7 +10,9 @@ import UserScreen from './screens/UserScreen';
 import AboutScreen from './screens/AboutScreen';
 import CalendarScreen from './screens/CalendarScreen';
 import NotificationDetailScreen from './screens/NotificationDetailScreen';
-
+import ChangePasswordScreen from './screens/ChangePasswordScreen';
+import PreferencesScreen from './screens/PreferencesScreen';
+import UpdateProfileScreen from './screens/UpdateProfileScreen.';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -57,6 +59,21 @@ export default function App() {
           name="Usuario" 
           component={UserScreen} 
           options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="ChangePassword" 
+          component={ChangePasswordScreen} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Preferences" 
+          component={PreferencesScreen} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="UpdateProfile" 
+          component={UpdateProfileScreen} 
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
