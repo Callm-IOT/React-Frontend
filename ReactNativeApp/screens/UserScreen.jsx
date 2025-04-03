@@ -2,6 +2,14 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, StatusBar, SafeAreaView } from 'react-native';
 
 const UserScreen = ({ navigation }) => {
+  // Datos del usuario actual
+  const userData = {
+    name: 'Juan Pérez',
+    email: 'juan.perez@example.com',
+    image: require('../assets/iconuser.png'),
+    isAdmin: true // Cambiar según si es administrador o no
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar backgroundColor="#345830" barStyle="light-content" />
@@ -22,26 +30,43 @@ const UserScreen = ({ navigation }) => {
           {/* Información del usuario */}
           <View style={styles.userCard}>
             <Image 
-              source={require('../assets/iconuser.png')} 
+              source={userData.image} 
               style={styles.profileImage} 
             />
-            <Text style={styles.userName}>Juan Pérez</Text>
-            <Text style={styles.userEmail}>juan.perez@example.com</Text>
+            <Text style={styles.userName}>{userData.name}</Text>
+            <Text style={styles.userEmail}>{userData.email}</Text>
           </View>
 
           {/* Botones de acciones */}
           <View style={styles.actionsContainer}>
-            <TouchableOpacity style={[styles.actionButton, styles.firstButton]}>
+            {/* 1. Botón para Actualizar Perfil */}
+            <TouchableOpacity 
+              style={[styles.actionButton, styles.firstButton]}
+              onPress={() => navigation.navigate('UpdateProfile', {
+                currentName: userData.name,
+                currentImage: userData.image
+              })}
+            >
               <Text style={styles.actionButtonText}>Actualizar Perfil</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={styles.actionButton}>
+            {/* 2. Botón para Cambiar Contraseña */}
+            <TouchableOpacity 
+              style={styles.actionButton}
+              onPress={() => navigation.navigate('ChangePassword')}
+            >
               <Text style={styles.actionButtonText}>Cambiar Contraseña</Text>
             </TouchableOpacity>
             
-            <TouchableOpacity style={[styles.actionButton, styles.lastButton]}>
-              <Text style={styles.actionButtonText}>Preferencias</Text>
-            </TouchableOpacity>
+            {/* 3. Botón para Preferencias (solo visible para admin) */}
+            {userData.isAdmin && (
+              <TouchableOpacity 
+                style={[styles.actionButton, styles.lastButton]}
+                onPress={() => navigation.navigate('Preferences')}
+              >
+                <Text style={styles.actionButtonText}>Preferencias</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
@@ -49,6 +74,7 @@ const UserScreen = ({ navigation }) => {
   );
 };
 
+// Los estilos se mantienen igual que en tu código original
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -72,11 +98,13 @@ const styles = StyleSheet.create({
     height: 24,
     tintColor: '#F5F5DC',
     marginRight: 15,
+    marginTop: 39,
   },
   headerTitle: {
     fontSize: 20,
     color: '#F5F5DC',
     fontWeight: '600',
+    marginTop: 39,
   },
   mainContent: {
     flex: 1,
